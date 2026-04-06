@@ -1,7 +1,7 @@
 {
   "id": "02-01-008",
   "title": "修车尝试",
-  "background": "../../images/backgrounds/street.jpg",
+  "background": "./data/doomsday/images/backgrounds/street.jpg",
   "content": "你打开引擎盖，里面的情况比想象中好。电池还有电，但发动机需要一些调整。\\n\\n「我会一点机械，」小雨说，「让我帮忙。」\\n\\n你们一起动手，花了将近一个小时。小雨的医疗包里竟然有一些工具，她解释说这是她父亲教她的——在末世，多一项技能就多一条生路。\\n\\n引擎终于发出了轰鸣声。\\n\\n「成功了！」小雨露出久违的笑容。\\n\\n但油箱的指针显示，燃料只够跑很短的距离。",
   "selections": [
     {

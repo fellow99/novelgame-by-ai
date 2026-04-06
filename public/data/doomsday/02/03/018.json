@@ -1,7 +1,7 @@
 {
   "id": "02-03-018",
   "title": "对质",
-  "background": "../../images/backgrounds/wilderness.jpg",
+  "background": "./data/doomsday/images/backgrounds/wilderness.jpg",
   "content": "你拿着地图走到小雨面前。\\n\\n「这是什么？」你问道。\\n\\n她的脸色瞬间变了，伸手想拿回地图，但你避开了。\\n\\n「我...我可以解释。」她的声音有些颤抖，「但这不是你想的那样。」\\n\\n「那是什么？」你盯着她的眼睛，「我们说好了一起去 7 号避难所，但你的地图上标记的是另一个地方。」\\n\\n小雨低下头，沉默了很久。终于，她开口了。",
   "selections": [
     {

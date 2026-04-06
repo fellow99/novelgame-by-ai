@@ -1,7 +1,7 @@
 {
   "id": "02-01-002",
   "title": "她的故事",
-  "background": "../../images/backgrounds/wilderness.jpg",
+  "background": "./data/doomsday/images/backgrounds/wilderness.jpg",
   "content": "走在荒芜的公路上，小雨开始讲述她的故事。\\n\\n「我是医生，或者说...曾经是。灾难爆发时，我正在研究辐射对人体的长期影响。」\\n\\n她停顿了一下，望向远方的废墟。「我的研究数据都毁了，但我记得关键部分。7 号避难所有一个完整的医疗设施，那里可能有我需要的资料。」\\n\\n「那你父亲呢？」你问道。\\n\\n她的声音变得低沉：「他 last 传给我的消息说，那里很安全。但我已经三年没有他的消息了。」",
   "selections": [
     {

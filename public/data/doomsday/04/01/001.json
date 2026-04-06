@@ -1,7 +1,7 @@
 {
   "id": "04-01-001",
   "title": " sealed door",
-  "background": "../../images/backgrounds/building.jpg",
+  "background": "./data/doomsday/images/backgrounds/building.jpg",
   "content": "巨大的金属门横亘在面前，锈迹斑斑的表面爬满了岁月的痕迹。门上用褪色的红漆写着警告标语：\"未经授权，禁止入内\"。\n\n林小雨站在我身边，呼吸在寒冷的空气中凝成白雾。\"这就是 7 号避难所，\"她轻声说，声音里带着某种难以名状的情绪。\n\n老陈没有跟上来。我记得他最后的身影，记得他说的话。\"走吧，别回头。\"\n\n门紧闭着，像一道分隔生死的界限。废土的风呼啸而过，卷起地上的尘埃。我们走了这么远，经历了这么多，终于站在了这里。\n\n但门是锁着的。",
   "hp": 0,
   "selections": [

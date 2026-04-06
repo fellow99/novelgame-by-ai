@@ -1,7 +1,7 @@
 {
   "id": "02-01-007",
   "title": "发现车辆",
-  "background": "../../images/backgrounds/street.jpg",
+  "background": "./data/doomsday/images/backgrounds/street.jpg",
   "content": "第二天清晨，你们继续上路。走了大约两小时后，小雨突然停下脚步。\\n\\n「看那边！」她指向路边的一辆越野车。车子看起来相对完整，车窗虽然布满灰尘但没有破碎。\\n\\n你们小心翼翼地靠近。车门没有锁，钥匙竟然还插在点火开关上。\\n\\n「这太幸运了，」小雨说，「也许是上天给我们的礼物。」\\n\\n但你总觉得有些不对劲。在这片废墟中，一辆完好的车太过罕见了。",
   "selections": [
     {
