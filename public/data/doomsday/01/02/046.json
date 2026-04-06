@@ -1,0 +1,13 @@
+{
+  "id": "01-02-046",
+  "title": "绕路",
+  "background": "./data/doomsday/images/backgrounds/wilderness.jpg",
+  "content": "你决定绕路，避开辐射区。\n\n这条路比预期中更难走。你要穿过一片荒野，这里曾经是公园，现在长满了变异的植物。\n\n走了两天，你的食物快耗尽了。但好在你没有受到辐射。\n\n远处，你看到了一座小镇。也许那里会有补给。",
+  "selections": [
+    {
+      "icon": "🏘️",
+      "text": "前往小镇",
+      "to": "01-03-053"
+    }
+  ]
+}

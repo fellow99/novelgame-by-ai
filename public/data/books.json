@@ -1,0 +1,10 @@
+{
+  "books": [
+    {
+      "title": "末日",
+      "subtitle": "生存与抉择",
+      "cover": "./data/doomsday/images/cover.jpg",
+      "path": "doomsday/book.json"
+    }
+  ]
+}
