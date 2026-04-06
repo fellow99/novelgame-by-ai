@@ -15,7 +15,7 @@
 - **分支选择**: 多路线叙事，抉择影响结局
 
 ### 🎨 AI 图像生成
-- 集成 bailian-image 服务，自动生成背景图
+- 使用「千问 - 文生图」Skill 生成背景图
 - 根据小说 tags 自动带入场景上下文
 - 支持手动上传图片作为替代
 
@@ -231,6 +231,60 @@ cp -r public/data/doomsday public/data/my-novel
 
 刷新页面即可查看效果，修改即时生效。
 
+## AI 生成配图
+
+### 前置条件
+
+1. **获取 API Key**: 从 [阿里云百炼控制台](https://help.aliyun.com/zh/model-studio/get-api-key) 获取 API Key
+2. **配置环境变量**: 
+   ```bash
+   export DASHSCOPE_API_KEY="sk-xxx"
+   ```
+
+### 使用 Skill 生成图片
+
+使用「千问 - 文生图」Skill 生成小说背景图：
+
+```bash
+# 基本用法
+./skills/qwen-image/generate-image.sh "图片描述" qwen-image-2.0-pro "2048*2048" 1
+
+# 示例：生成末日废土街道场景
+./skills/qwen-image/generate-image.sh "末日废土风格的街道，破败的建筑，灰暗的天空，写实风格" qwen-image-2.0-pro "2048*2048" 1
+```
+
+### 图片存储
+
+生成的图片 URL 有效期为 **24 小时**，必须：
+
+1. **立即下载**: 打开返回的 URL 下载图片
+2. **保存到项目**: 放入 `public/data/<小说名>/images/backgrounds/` 目录
+3. **重命名**: 使用描述性文件名，如 `street-ruined-01.png`
+4. **在 JSON 中引用**:
+   ```json
+   {
+     "background": "images/backgrounds/street-ruined-01.png"
+   }
+   ```
+
+### 推荐模型
+
+- **qwen-image-2.0-pro**: 擅长文本渲染，适合海报、图表（推荐）
+- **qwen-image-plus**: 增强版，通用场景
+- **wan2.7-image-pro**: 功能最全，支持 4K 分辨率
+
+### 提示词技巧
+
+- **具体详细**: 描述主体、场景、风格、光照、构图
+- **结构化**: 按"主体 + 场景 + 风格 + 细节"顺序
+- **带上 tags**: 结合小说的 tags 作为上下文
+
+示例提示词：
+```
+冬日北京的都市街景，青灰瓦顶、朱红色外墙的中式商铺，檐下悬挂灯笼，
+湿润鹅卵石路面，阴天漫射光，写实风格，高清晰度
+```
+
 ## 示例小说《末日》
 
 框架包含一部完整的示例小说《末日》，讲述末日生存环境中的抉择故事，展示了框架的所有核心功能。
@@ -275,7 +329,7 @@ cp -r public/data/doomsday public/data/my-novel
 - **Vue 3** - 前端框架（Composition API）
 - **TypeScript** - 类型系统，100% 类型覆盖
 - **Vite** - 构建工具，极速开发体验
-- **bailian-image** - AI 图像生成服务
+- **千问 - 文生图 Skill** - AI 图像生成（基于阿里云百炼 API）
 
 ## 规范文档
 
@@ -312,7 +366,7 @@ cp -r public/data/doomsday public/data/my-novel
 - [x] 响应式布局（PC、平板、移动端）
 - [x] 阅读进度自动保存
 - [x] 刷新页面恢复进度
-- [ ] AI 生图功能集成
+- [x] AI 生图功能集成（使用千问 - 文生图 Skill）
 - [ ] 图片缓存优化
 - [ ] 链接校验工具
 

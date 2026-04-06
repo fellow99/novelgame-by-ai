@@ -1,88 +1,71 @@
 # 图片模块实现方案
 
-**版本**: v1.0.0  
-**日期**: 2026-04-05  
-**状态**: 初稿  
+**版本**: v1.1.0  
+**日期**: 2026-04-06  
+**状态**: 已更新  
 
 ---
 
 ## 1. 技术设计
 
-### 1.1 Composable 设计
+### 1.1 工作流程
 
-```typescript
-// src/composables/useImageGeneration.ts
-export function useImageGeneration() {
-  const imageCache = new Map<string, string>()
-  const loading = ref(false)
-  const error = ref<string | null>(null)
-  
-  async function generateImage(
-    prompt: string,
-    tags: string,
-    options?: ImageOptions
-  ): Promise<string> {
-    // 1. 检查缓存
-    const cacheKey = `${tags}_${prompt}`
-    if (imageCache.has(cacheKey)) {
-      return imageCache.get(cacheKey)!
-    }
-    
-    // 2. 调用 bailian-image
-    const fullPrompt = `${tags}, ${prompt}`
-    const task = await bailianImageGenerate({
-      prompt: fullPrompt,
-      size: options?.size || '1328*1328',
-      n: options?.n || 1,
-      watermark: false
-    })
-    
-    // 3. 轮询任务状态
-    const result = await pollTaskStatus(task.task_id)
-    
-    if (result.task_status !== 'SUCCEEDED') {
-      throw new Error('Image generation failed')
-    }
-    
-    // 4. 存入缓存
-    const imageUrl = result.results[0].url
-    imageCache.set(cacheKey, imageUrl)
-    
-    return imageUrl
-  }
-  
-  async function pollTaskStatus(taskId: string) {
-    // 轮询实现
-  }
-  
-  return {
-    generateImage,
-    loading,
-    error
-  }
-}
+```
+创作者编写小说内容
+       ↓
+需要背景图时运行 Skill
+       ↓
+./skills/qwen-image/generate-image.sh "<prompt>" <model>
+       ↓
+API 返回临时 URL（24 小时有效）
+       ↓
+下载图片到本地项目目录
+       ↓
+在 JSON 中引用本地路径
 ```
 
-### 1.2 bailian-image MCP 调用
+### 1.2 图片生成脚本
 
-使用 skill_mcp 工具调用：
+```bash
+#!/bin/bash
+# skills/qwen-image/generate-image.sh
 
-```typescript
-import { skill_mcp } from '@/utils/mcp'
+# 参数
+PROMPT="$1"
+MODEL="${2:-qwen-image-2.0-pro}"
+SIZE="${3:-2048*2048}"
+N="${4:-1}"
 
-async function bailianImageGenerate(params: {
-  prompt: string
-  size: string
-  n: number
-  watermark: boolean
-}) {
-  const result = await skill_mcp({
-    mcp_name: 'bailian-image',
-    tool_name: 'generate_image',
-    arguments: params
-  })
-  return JSON.parse(result)
-}
+# 调用阿里云百炼 API（千问系列 - 同步）
+curl --location \
+  'https://dashscope.aliyuncs.com/api/v1/services/aigc/multimodal-generation/generation' \
+  --header 'Content-Type: application/json' \
+  --header "Authorization: Bearer $DASHSCOPE_API_KEY" \
+  --data "{
+    \"model\": \"$MODEL\",
+    \"input\": {
+      \"messages\": [{
+        \"role\": \"user\",
+        \"content\": [{\"text\": \"$PROMPT\"}]
+      }]
+    },
+    \"parameters\": {
+      \"size\": \"$SIZE\",
+      \"n\": $N,
+      \"watermark\": false,
+      \"prompt_extend\": true
+    }
+  }"
+```
+
+### 1.3 图片下载与存储
+
+```bash
+# 下载示例
+IMAGE_URL="https://dashscope-xxx.oss-accelerate.aliyuncs.com/xxx.png"
+DEST_PATH="public/data/doomsday/images/backgrounds/street-01.png"
+
+curl -o "$DEST_PATH" "$IMAGE_URL"
 ```
 
 ---
@@ -90,75 +73,87 @@ async function bailianImageGenerate(params: {
 ## 2. 文件结构
 
 ```
-src/
-├── composables/
-│   └── useImageGeneration.ts
-├── components/
-│   └── ImageViewer/
-│       ├── ImageViewer.vue
-│       └── ImageViewer.css
-└── utils/
-    └── image.ts
+project/
+├── skills/
+│   └── qwen-image/
+│       ├── SKILL.md              # Skill 主文件
+│       ├── generate-image.sh     # 图片生成脚本
+│       └── evals/
+│           └── evals.json        # 测试用例
+├── public/
+│   └── data/
+│       └── <小说名>/
+│           └── images/
+│               ├── cover.jpg
+│               └── backgrounds/  # 生成的背景图存储目录
+└── src/
+    └── composables/
+        └── useImageGeneration.ts # 可选：封装下载逻辑
 ```
 
 ---
 
 ## 3. 实现步骤
 
-### 3.1 创建 useImageGeneration.ts
+### 3.1 准备 Skill
 
-1. 定义类型接口
-2. 实现 generateImage 函数
-3. 实现 pollTaskStatus 函数
-4. 实现缓存逻辑
-5. 实现错误处理
+1. 配置环境变量 `DASHSCOPE_API_KEY`
+2. 测试 `generate-image.sh` 脚本
+3. 验证 API 调用正常
 
-### 3.2 创建 ImageViewer 组件
+### 3.2 生成图片
 
-1. 定义 props（src, alt, lazy）
-2. 实现懒加载逻辑
-3. 实现加载状态
-4. 实现错误状态
+1. 编写图片提示词（结合小说 tags）
+2. 运行 Skill 生成图片
+3. 获取返回的图像 URL
 
-### 3.3 集成到 App
+### 3.3 下载并存储
 
-1. 在 App.vue 中引入 useImageGeneration
-2. 在 Reader 组件中使用 ImageViewer
-3. 测试生图流程
+1. 使用 curl 下载图片到本地
+2. 保存到 `public/data/<小说名>/images/backgrounds/`
+3. 使用描述性文件名
+
+### 3.4 在 JSON 中引用
+
+```json
+{
+  "background": "images/backgrounds/street-ruined-01.png"
+}
+```
 
 ---
 
 ## 4. 错误处理
 
-### 4.1 错误类型
+### 4.1 API 错误
 
-```typescript
-enum ImageError {
-  GENERATION_FAILED = 'GENERATION_FAILED',
-  SERVICE_UNAVAILABLE = 'SERVICE_UNAVAILABLE',
-  TIMEOUT = 'TIMEOUT'
-}
-```
+| 错误码 | 原因 | 解决方案 |
+|--------|------|----------|
+| DataInspectionFailed | 提示词触发审核 | 修改敏感内容 |
+| Throttling / 429 | 限流 | 降低频率，稍后重试 |
+| URL 失效 | 超过 24 小时 | 重新生成 |
 
 ### 4.2 降级方案
 
 - 生图失败 → 显示默认背景色
-- 加载失败 → 显示占位图
+- 图片不存在 → 显示占位图
 - 网络错误 → 提供重试按钮
 
 ---
 
-## 5. 性能优化
+## 5. 最佳实践
 
-### 5.1 缓存策略
+### 5.1 提示词技巧
 
-- 内存缓存：Map 存储
-- 会话持久化：localStorage（可选）
+- **具体详细**: 描述主体、场景、风格、光照
+- **结构化**: 主体 + 场景 + 风格 + 细节
+- **结合 tags**: 带上小说的基础设定
 
-### 5.2 并发控制
+### 5.2 图片管理
 
-- 最大并发：3 个任务
-- 队列管理：FIFO
+- 及时下载：URL 24 小时后失效
+- 规范命名：`<场景>-<描述>-<序号>.png`
+- 分类存储：按小说和场景类型组织
 
 ---
 
@@ -166,13 +161,13 @@ enum ImageError {
 
 ### 6.1 功能测试
 
-- [ ] 生图功能正常
-- [ ] 缓存命中正确
-- [ ] 错误处理有效
-- [ ] 懒加载工作
+- [ ] Skill 调用正常
+- [ ] 图片生成成功
+- [ ] 下载并存储正确
+- [ ] JSON 引用正常显示
 
-### 6.2 性能测试
+### 6.2 错误处理测试
 
-- [ ] 首屏加载时间
-- [ ] 缓存命中率
-- [ ] 并发控制有效
+- [ ] API 错误提示
+- [ ] URL 过期处理
+- [ ] 文件缺失降级
