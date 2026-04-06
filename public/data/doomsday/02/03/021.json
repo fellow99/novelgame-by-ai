@@ -1,7 +1,7 @@
 {
   "id": "02-03-021",
   "title": "新的危机",
-  "background": "../../images/backgrounds/building.jpg",
+  "background": "./data/doomsday/images/backgrounds/building.jpg",
   "content": "「...这里是幸存者聚集地...重复...这里是安全区...」\\n\\n收音机里传来断断续续的声音，似乎是一个广播信号。\\n\\n「有人在广播！」小雨兴奋地说，「这说明那里有其他人，可能有补给，甚至有医疗设施！」\\n\\n信号很弱，但你能听出大概的方向。那个聚集地离你们现在的位置不远，大概半天的路程。\\n\\n但这意味着要改变路线。去研究所，还是去聚集地？\\n\\n「也许...」小雨犹豫地说，「我父亲也在那里。」",
   "selections": [
     {

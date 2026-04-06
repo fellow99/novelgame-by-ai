@@ -1,7 +1,7 @@
 {
   "id": "03-01-001",
   "title": "食物告罄",
-  "background": "../../images/backgrounds/camp.jpg",
+  "background": "./data/doomsday/images/backgrounds/camp.jpg",
   "content": "背包里只剩下最后半块压缩饼干。\\n\\n林小雨靠在墙边，脸色苍白。她已经两天没怎么吃东西了，我也一样。胃里的灼烧感提醒着我，我们撑不了多久了。\\n\\n\"还能坚持多久？\"她轻声问，声音虚弱。\\n\\n我数了数剩下的物资，心里一沉。最多一天。如果不找到食物，我们连走到下一个城镇的力气都没有。\\n\\n远处传来几声乌鸦的叫声，像是在预示着什么。",
   "hp": -1,
   "selections": [

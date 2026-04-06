@@ -1,7 +1,7 @@
 {
   "id": "02-03-019",
   "title": "她的苦衷",
-  "background": "../../images/backgrounds/wilderness.jpg",
+  "background": "./data/doomsday/images/backgrounds/wilderness.jpg",
   "content": "「那个地方...」小雨的声音很轻，「是我以前工作的研究所。灾难爆发时，我把最重要的研究数据藏在了那里。」\\n\\n她抬起头，眼中含着泪水：「那些数据可能能拯救很多人，包括...包括我父亲。他 last 的消息说他病了，可能是辐射病。只有我的研究能救他。」\\n\\n「那你为什么不说实话？」\\n\\n「因为我怕...」她哽咽了，「怕你觉得我在利用你，怕你会丢下我一个人去。」\\n\\n她从包里拿出一个急救包递给你：「这是我能给你的全部诚意。」",
   "items": ["first-aid"],
   "selections": [

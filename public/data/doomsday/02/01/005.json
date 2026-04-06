@@ -1,7 +1,7 @@
 {
   "id": "02-01-005",
   "title": "分享食物",
-  "background": "../../images/backgrounds/building.jpg",
+  "background": "./data/doomsday/images/backgrounds/building.jpg",
   "content": "雨还在下，你们坐在加油站的角落里。肚子开始咕咕叫了。\\n\\n你从背包里拿出最后一些食物——两包压缩饼干和一小块肉干。这是你剩下的全部。\\n\\n小雨看着你，又看了看食物，轻声说：「我不饿，你吃吧。」但你知道她在撒谎，她的眼神出卖了她。\\n\\n这是一个艰难的选择。在这个世界，食物意味着生存。但分享食物，也意味着建立信任。",
   "selections": [
     {

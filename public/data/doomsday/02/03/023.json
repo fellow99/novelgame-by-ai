@@ -1,7 +1,7 @@
 {
   "id": "02-03-023",
   "title": "抵达聚集地",
-  "background": "../../images/backgrounds/building.jpg",
+  "background": "./data/doomsday/images/backgrounds/building.jpg",
   "content": "聚集地比想象中更大。这是一个被围墙包围的社区，门口有武装守卫。\\n\\n「停车！什么人？」守卫举枪喊道。\\n\\n你摇下车窗：「我们收到了广播信号，想来看看。」\\n\\n守卫打量了你们一会儿，然后示意其他人放下武器：「新来的？进来吧。但记住，这里有规矩。」\\n\\n车子缓缓驶入聚集地。里面的景象让你们惊讶——有临时搭建的房屋，有人在种植蔬菜，甚至还有孩子在玩耍。\\n\\n在这个破碎的世界里，这里就像一个奇迹。",
   "selections": [
     {

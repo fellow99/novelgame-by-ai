@@ -1,7 +1,7 @@
 {
   "id": "02-02-013",
   "title": "加油站搜刮",
-  "background": "../../images/backgrounds/building.jpg",
+  "background": "./data/doomsday/images/backgrounds/building.jpg",
   "content": "油表指针已经接近红线。你们需要燃料，否则车子很快就会变成废铁。\\n\\n前方出现了一个废弃的加油站，看起来比之前那个更大。\\n\\n「我去看看有没有能用的油泵，」小雨说，「你负责警戒。」\\n\\n你站在车旁，警惕地观察四周。加油站里静悄悄的，只有风吹过破碎招牌的声音。\\n\\n小雨从储物间出来时，手里拿着几个油桶：「找到了一些密封的，应该还能用。」\\n\\n她还发现了一些罐头食品。",
   "items": ["canned-food"],
   "selections": [
