@@ -1,22 +1,20 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { fileURLToPath, URL } from 'node:url'
+import pkg from './package.json'
 
 export default defineConfig({
-  base: '/novelgame-by-ai/',
-  plugins: [vue()],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
-  },
+  base: `/${pkg.name}`,
   server: {
     host: '0.0.0.0',
-    port: 5173,
-    allowedHosts: true
+    allowedHosts: true,
   },
   build: {
-    outDir: 'dist',
-    assetsDir: 'assets'
-  }
+    outDir: `dist`
+  },
+  resolve: {
+    alias: {
+      '@': '/src'
+    }
+  },
+  plugins: [vue()]
 })
